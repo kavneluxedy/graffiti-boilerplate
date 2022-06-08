@@ -5,7 +5,7 @@ import SvgHome from '../img/svg/SvgHome.js';
 const Home = () => {
   return (
     <div className="home">
-      <a href="app">
+      <a href="./app">
         <div className="home">
           <div className="title">
             <SvgHome width="300px" />

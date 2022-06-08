@@ -5,6 +5,7 @@
   "description": "Electron application boilerplate based on React, React Router, Webpack, React Hot Loader for rapid application development",
   "homepage": "./",
   "scripts": {
+    "rm-release": "rimraf release",
     "build": "concurrently \"yarn build-main\" \"yarn build-renderer\"",
     "build-dll": "cross-env NODE_ENV=development webpack --config ./configs/webpack.config.renderer.dev.dll.babel.js --colors",
     "build-e2e": "cross-env E2E_BUILD=true yarn build",
@@ -19,10 +20,10 @@
     "lint-styles": "stylelint --ignore-path .eslintignore '**/*.*(css|scss)' --syntax scss",
     "lint-styles-fix": "yarn --silent lint-styles --fix; exit 0",
     "package": "yarn build && electron-builder build --publish never",
-    "package-all": "yarn build && electron-builder build -mwl",
-    "package-ci": "yarn postinstall && yarn build && electron-builder --publish always",
-    "package-linux": "yarn build && electron-builder build --linux",
-    "package-win": "yarn build && electron-builder build --win --x64",
+    "package-all": "yarn build && rimraf release && electron-builder build -mwl",
+    "package-ci": "yarn postinstall && yarn build && rimraf release && electron-builder --publish always",
+    "package-linux": "yarn build && rimraf release && electron-builder build --linux",
+    "package-win": "yarn build && rimraf release && electron-builder build --win --x64",
     "postinstall": "node -r @babel/register internals/scripts/CheckNativeDep.js && yarn flow-typed && electron-builder install-app-deps && yarn build-dll && opencollective-postinstall",
     "postlint-fix": "prettier --ignore-path .eslintignore --single-quote --write '**/*.{js,jsx,json,html,css,less,scss,yml}'",
     "postlint-styles-fix": "prettier --ignore-path .eslintignore --single-quote --write '**/*.{css,scss}'",
@@ -83,8 +84,7 @@
     },
     "win": {
       "target": [
-        "nsis",
-        "msi"
+        "nsis"
       ]
     },
     "linux": {
