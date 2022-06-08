@@ -4,7 +4,7 @@
 
 import path from 'path';
 import webpack from 'webpack';
-import fs from 'fs';
+const fs = require('fs/promises');
 import { dependencies as externals } from '../app/package.json';
 import { dependencies as possibleExternals } from '../package.json';
 

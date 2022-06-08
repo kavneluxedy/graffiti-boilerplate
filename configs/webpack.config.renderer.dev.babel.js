@@ -7,7 +7,7 @@
  * https://webpack.js.org/concepts/hot-module-replacement/
  */
 import path from 'path';
-import fs from 'fs';
+const fs = require('fs/promises');
 import webpack from 'webpack';
 import chalk from 'chalk';
 import merge from 'webpack-merge';
